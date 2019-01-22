@@ -1,0 +1,12 @@
+{
+    "name": "greeschenko/cfstructure",
+    "description": "easy web page structure construction from json data and views",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Oleksiy Hryshchenko",
+            "email": "greeschenko@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}

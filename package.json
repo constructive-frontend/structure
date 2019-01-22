@@ -1,0 +1,32 @@
+{
+  "name": "constructive-frontend-structure",
+  "version": "0.0.1",
+  "description": "easy web page structure construction from json data and views",
+  "keywords": [
+    "gulp",
+    "js",
+    "sass",
+    "autoprefixer",
+    "imagemin",
+    "UI",
+    "frontend"
+  ],
+  "author": "Oleksiy Hryshchenko",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "*",
+    "@babel/preset-env": "*",
+    "gulp": "^3.9.1",
+    "gulp-pug": "*",
+    "del": "*",
+    "gulp-autoprefixer": "*",
+    "gulp-cssnano": "*",
+    "gulp-concat": "*",
+    "gulp-livereload": "*",
+    "gulp-rename": "*",
+    "gulp-sass": "*",
+    "gulp-uglify": "*",
+    "gulp-babel": "*",
+    "jquery": "*"
+  }
+}
