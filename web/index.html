@@ -4,11 +4,218 @@
     <meta charset="utf-8">
     <title>constructive framework structure.js</title>
     <link href="css/main.min.css" rel="stylesheet">
+    <link href="css/libs.css" rel="stylesheet">
+    <link href="css/demoapp.min.css" rel="stylesheet">
   </head>
   <body>
-    <h1>constructive framework structure.js</h1>
-    <div class="container">
-      <div id="res"></div>
+    <div class="container col">
+      <div class="sidemenu">
+        <div id="scrollspyres"></div>
+      </div>
+      <div class="col-3"></div>
+      <div class="col-9">
+        <h1>constructive framework structure.js</h1>
+        <h2 class="scrollspy" data-lvl="1" data-title="Base usage" data-ico="fa-angle-right">Base usage</h2>
+        <p>Add to html</p>
+        <pre><div id="res1"></div></pre>
+        <p>Add js code</p>
+        <pre>let demo1 = new Struct({
+    el: '#res1',
+    tmpl: `<div class="demo1">{{word1}} {{word2}}</div>`,
+    data: {
+        "word1": 'Hello',
+        "word2": 'World!!!'
+    },
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res01"></div>
+        <p>If you need  change reactive propertise type in js console</p>
+        <pre>demo1.data.word2 = 'Struct!!!'
+demo1.rerender();</pre>
+        <h2 class="scrollspy" data-lvl="1" data-title="Iteration" data-ico="fa-angle-right">Iteration</h2>
+        <p>Add to html</p>
+        <pre><div id="res2"></div></pre>
+        <p>Add js code</p>
+        <pre>let demo2 = new Struct({
+    el: '#res2',
+    tmpl: `<div class="demo2">{{word1}} {{word2}}</div>`,
+    data: [
+        {
+            "word1": 'Hello',
+            "word2": 'World!!!'
+        },
+        {
+            "word1": 'Hello',
+            "word2": 'World!!!'
+        },
+        {
+            "word1": 'Hello',
+            "word2": 'World!!!'
+        },
+    ],
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res02"></div>
+        <p>for change data element write in js console or add to js code</p>
+        <pre>demo2.data[2].word2 = 'Struct!!!'
+demo2.rerender();</pre>
+        <h2 class="scrollspy" data-lvl="1" data-title="Templete from request" data-ico="fa-angle-right">Templete from request</h2>
+        <p>For templete you can use html file</p>
+        <p>Exemple we have template in file /demos/demo3.html</p>
+        <pre><dl class="descr-horizontal">
+    <dt>ID:</dt>
+    <dd>{{id}}</dd>
+    <dt>Count:</dt>
+    <dd>{{count}}</dd>
+</dl></pre>
+        <p>Add to html page</p>
+        <pre><div id="res3"></div></pre>
+        <p>And add to js code</p>
+        <pre>let demo3 = new Struct({
+    el: '#res3',
+    tmpl: 'demos/demo3',
+    data:
+        {
+            "id": '12345',
+            "count": 34
+        }
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res03"></div>
+        <h2 class="scrollspy" data-lvl="1" data-title="Data from request" data-ico="fa-angle-right">Data from request</h2>
+        <p>For data you can use request to server</p>
+        <p>Exemple we get json data from request to /json/demo4.json</p>
+        <pre>[
+    {
+        "id": "12",
+        "count": 300
+    },
+    {
+        "id": "13",
+        "count": 400
+    },
+    {
+        "id": "14",
+        "count": 500
+    }
+]</pre>
+        <p>Add to html page</p>
+        <pre><div id="res4"></div></pre>
+        <p>And add to js code</p>
+        <pre>let demo4 = new Struct({
+    el: '#res4',
+    tmpl: 'demos/demo3',
+    data: '/json/demo4.json'
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res04"></div>
+        <h2 class="scrollspy" data-lvl="1" data-title="Render Interval" data-ico="fa-angle-right">Render Interval</h2>
+        <p>You can also add request interval in miliseconds if you need rerender new data from server on page with timeout</p>
+        <p>Example</p>
+        <pre>let demo4 = new Struct({
+    el: '#res4',
+    tmpl: 'demos/demo3',
+    data: '/json/demo4.json',
+    interval: 5000
+}).render();</pre>
+        <h2 class="scrollspy" data-lvl="1" data-title="Events" data-ico="fa-angle-right">Events</h2>
+        <p>You can add js events after structure building complete</p>
+        <p>Add to html</p>
+        <pre><div id="res5"></div></pre>
+        <p>Add js code</p>
+        <pre>let demo5 = new Struct({
+    el: '#res5',
+    tmpl: `
+        <div class="demo5">
+            Count: <span id="countforchange">{{count}}</span>
+            <button id="demo5btn" type="button">Push for +1</button>
+        </div>
+    `,
+    data: {
+        "count": 0,
+    },
+    events: function() {
+        $('#demo5btn').bind('click', function() {
+            var c = Number($('#countforchange').html());
+            $('#countforchange').html(c + 1);
+            return false;
+        });
+    }
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res05"></div>
+        <p>For same result you can use another way</p>
+        <p>Add to html</p>
+        <pre><div id="res6"></div></pre>
+        <p>Add js code</p>
+        <pre>let demo6 = new Struct({
+    el: '#res06',
+    tmpl: `
+        <div class="demo5">
+            Count: {{count}}
+            <button type="button">Push for +1</button>
+        </div>
+    `,
+    data: {
+        "count": 0,
+    },
+    events: function() {
+        demo6.el.find('button').bind('click', function() {
+            var c = demo6.data.count;
+            demo6.data.count = c + 1;
+            demo6.rerender();
+            return false;
+        });
+    }
+}).render();</pre>
+        <p>And see result</p>
+        <div class="result" id="res06"></div>
+        <p>Try more complicated example</p>
+        <pre>let demo7 = new Struct({
+    el: '#res7',
+    tmpl: `
+        <div class="demo7item">
+            <p>{{title}}</p>
+            <p class="info"></p>
+        </div>
+    `,
+    data: [{
+            "title": "Item number one",
+            "info": {
+                "stars": 3,
+                "likes": 2,
+            }
+        },
+        {
+            "title": "Item number two",
+            "info": {
+                "stars": 5,
+                "likes": 12,
+            }
+        },
+        {
+            "title": "Item number three",
+            "info": {
+                "stars": 1,
+                "likes": 0,
+            }
+        },
+    ],
+    events: function() {
+        demo7.el.find('.info').each(function(index) {
+            var t = new Struct({
+                el: $(this),
+                tmpl: `<div>Stars: {{stars}}  Likes: {{likes}}</div>`,
+                data: demo7.data[index].info
+            }).render();
+        });
+    }
+}).render();</pre>
+        <p>and see result</p>
+        <div class="result" id="res07"></div>
+        <h2 class="scrollspy" data-lvl="1" data-title="Components" data-ico="fa-angle-right">Components</h2>
+        <p>Under development</p>
+      </div>
     </div>
   </body>
   <footer></footer>

@@ -4,10 +4,233 @@ html(lang='en')
         meta(charset='utf-8')
         title constructive framework structure.js
         link(href='css/main.min.css', rel='stylesheet')
+        link(href='css/libs.css', rel='stylesheet')
+        link(href='css/demoapp.min.css', rel='stylesheet')
     body
-        h1 constructive framework structure.js
-        .container
-            #res
+        .container.col
+            .sidemenu
+                #scrollspyres
+            .col-3
+            .col-9
+                h1 constructive framework structure.js
+                h2(class="scrollspy" data-lvl="1" data-title="Base usage" data-ico="fa-angle-right") Base usage
+                p Add to html
+                pre
+                    <div id="res1"></div>
+                p Add js code
+                pre
+                   | let demo1 = new Struct({
+                   |     el: '#res1',
+                   |     tmpl: `<div class="demo1">{{word1}} {{word2}}</div>`,
+                   |     data: {
+                   |         "word1": 'Hello',
+                   |         "word2": 'World!!!'
+                   |     },
+                   | }).render();
+                p And see result
+                div.result#res01
+                p If you need  change reactive propertise type in js console
+                pre
+                   | demo1.data.word2 = 'Struct!!!'
+                   | demo1.rerender();
+                h2(class="scrollspy" data-lvl="1" data-title="Iteration" data-ico="fa-angle-right") Iteration
+                p Add to html
+                pre
+                    <div id="res2"></div>
+                p Add js code
+                pre
+                   | let demo2 = new Struct({
+                   |     el: '#res2',
+                   |     tmpl: `<div class="demo2">{{word1}} {{word2}}</div>`,
+                   |     data: [
+                   |         {
+                   |             "word1": 'Hello',
+                   |             "word2": 'World!!!'
+                   |         },
+                   |         {
+                   |             "word1": 'Hello',
+                   |             "word2": 'World!!!'
+                   |         },
+                   |         {
+                   |             "word1": 'Hello',
+                   |             "word2": 'World!!!'
+                   |         },
+                   |     ],
+                   | }).render();
+                p And see result
+                div.result#res02
+                p for change data element write in js console or add to js code
+                pre
+                   | demo2.data[2].word2 = 'Struct!!!'
+                   | demo2.rerender();
+                h2(class="scrollspy" data-lvl="1" data-title="Templete from request" data-ico="fa-angle-right") Templete from request
+                p For templete you can use html file
+                p Exemple we have template in file /demos/demo3.html
+                pre
+                   | <dl class="descr-horizontal">
+                   |     <dt>ID:</dt>
+                   |     <dd>{{id}}</dd>
+                   |     <dt>Count:</dt>
+                   |     <dd>{{count}}</dd>
+                   | </dl>
+                p Add to html page
+                pre
+                    <div id="res3"></div>
+                p And add to js code
+                pre
+                   | let demo3 = new Struct({
+                   |     el: '#res3',
+                   |     tmpl: 'demos/demo3',
+                   |     data:
+                   |         {
+                   |             "id": '12345',
+                   |             "count": 34
+                   |         }
+                   | }).render();
+                p And see result
+                div.result#res03
+                h2(class="scrollspy" data-lvl="1" data-title="Data from request" data-ico="fa-angle-right") Data from request
+                p For data you can use request to server
+                p Exemple we get json data from request to /json/demo4.json
+                pre
+                   | [
+                   |     {
+                   |         "id": "12",
+                   |         "count": 300
+                   |     },
+                   |     {
+                   |         "id": "13",
+                   |         "count": 400
+                   |     },
+                   |     {
+                   |         "id": "14",
+                   |         "count": 500
+                   |     }
+                   | ]
+                p Add to html page
+                pre
+                    <div id="res4"></div>
+                p And add to js code
+                pre
+                   | let demo4 = new Struct({
+                   |     el: '#res4',
+                   |     tmpl: 'demos/demo3',
+                   |     data: '/json/demo4.json'
+                   | }).render();
+                p And see result
+                div.result#res04
+                h2(class="scrollspy" data-lvl="1" data-title="Render Interval" data-ico="fa-angle-right") Render Interval
+                p You can also add request interval in miliseconds if you need rerender new data from server on page with timeout
+                p Example
+                pre
+                   | let demo4 = new Struct({
+                   |     el: '#res4',
+                   |     tmpl: 'demos/demo3',
+                   |     data: '/json/demo4.json',
+                   |     interval: 5000
+                   | }).render();
+                h2(class="scrollspy" data-lvl="1" data-title="Events" data-ico="fa-angle-right") Events
+                p You can add js events after structure building complete
+                p Add to html
+                pre
+                    <div id="res5"></div>
+                p Add js code
+                pre
+                    | let demo5 = new Struct({
+                    |     el: '#res5',
+                    |     tmpl: `
+                    |         <div class="demo5">
+                    |             Count: <span id="countforchange">{{count}}</span>
+                    |             <button id="demo5btn" type="button">Push for +1</button>
+                    |         </div>
+                    |     `,
+                    |     data: {
+                    |         "count": 0,
+                    |     },
+                    |     events: function() {
+                    |         $('#demo5btn').bind('click', function() {
+                    |             var c = Number($('#countforchange').html());
+                    |             $('#countforchange').html(c + 1);
+                    |             return false;
+                    |         });
+                    |     }
+                    | }).render();
+                p And see result
+                div.result#res05
+                p For same result you can use another way
+                p Add to html
+                pre
+                    <div id="res6"></div>
+                p Add js code
+                pre
+                    | let demo6 = new Struct({
+                    |     el: '#res06',
+                    |     tmpl: `
+                    |         <div class="demo5">
+                    |             Count: {{count}}
+                    |             <button type="button">Push for +1</button>
+                    |         </div>
+                    |     `,
+                    |     data: {
+                    |         "count": 0,
+                    |     },
+                    |     events: function() {
+                    |         demo6.el.find('button').bind('click', function() {
+                    |             var c = demo6.data.count;
+                    |             demo6.data.count = c + 1;
+                    |             demo6.rerender();
+                    |             return false;
+                    |         });
+                    |     }
+                    | }).render();
+                p And see result
+                div.result#res06
+                p Try more complicated example
+                pre
+                   | let demo7 = new Struct({
+                   |     el: '#res7',
+                   |     tmpl: `
+                   |         <div class="demo7item">
+                   |             <p>{{title}}</p>
+                   |             <p class="info"></p>
+                   |         </div>
+                   |     `,
+                   |     data: [{
+                   |             "title": "Item number one",
+                   |             "info": {
+                   |                 "stars": 3,
+                   |                 "likes": 2,
+                   |             }
+                   |         },
+                   |         {
+                   |             "title": "Item number two",
+                   |             "info": {
+                   |                 "stars": 5,
+                   |                 "likes": 12,
+                   |             }
+                   |         },
+                   |         {
+                   |             "title": "Item number three",
+                   |             "info": {
+                   |                 "stars": 1,
+                   |                 "likes": 0,
+                   |             }
+                   |         },
+                   |     ],
+                   |     events: function() {
+                   |         demo7.el.find('.info').each(function(index) {
+                   |             var t = new Struct({
+                   |                 el: $(this),
+                   |                 tmpl: `<div>Stars: {{stars}}  Likes: {{likes}}</div>`,
+                   |                 data: demo7.data[index].info
+                   |             }).render();
+                   |         });
+                   |     }
+                   | }).render();
+                p and see result
+                div.result#res07
+                h2(class="scrollspy" data-lvl="1" data-title="Components" data-ico="fa-angle-right") Components
+                p Under development
     footer
     script(src="js/libs.js")
     script(src='js/cfstructure.min.js')

@@ -14,18 +14,18 @@ var gulp = require('gulp'),
     babel = require('gulp-babel');
 
 //Libs
-/*gulp.task('libscss', function() {
+gulp.task('libscss', function() {
     return gulp.src([
-            './node_modules/components-font-awesome/css/font-awesome.min.css',
-            './node_modules/bootstrap/dist/css/bootstrap.min.css',
+        './node_modules/constructive-frontend-style/web/css/cfstyle.min.css',
         ])
         .pipe(concat('libs.css'))
         .pipe(gulp.dest('./web/css'));
-});*/
+});
 
 gulp.task('libsjs', function() {
     return gulp.src([
             './node_modules/jquery/dist/jquery.min.js',
+            './node_modules/constructive-frontend-style/web/js/cfstyle.min.js'
         ])
         .pipe(concat('libs.js'))
         .pipe(gulp.dest('./web/js'));
@@ -80,7 +80,7 @@ gulp.task('scripts', function() {
 
 gulp.task('libinit', [
     'libsjs',
-    //'libscss',
+    'libscss',
     //'fonts'
 ]);
 

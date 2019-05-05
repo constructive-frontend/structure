@@ -27,6 +27,7 @@
     "gulp-sass": "*",
     "gulp-uglify": "*",
     "gulp-babel": "*",
+    "style": "github:constructive-frontend/style",
     "jquery": "*"
   }
 }

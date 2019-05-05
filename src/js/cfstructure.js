@@ -1,27 +1,62 @@
 class Struct {
     constructor(res, dom, data, events, dataurl, interval, errorevents) {
-        this.res = res;
-        if (this.res instanceof jQuery) {
-            this.el = res;
-        } else {
-            this.el = $(this.res);
-        }
-        this.res = res;
-        this.dom = dom;
-        this.data = data;
-        if (events == undefined) {
-            events = function() {
-                return false;
+        if (typeof(res) == 'object' && !(res instanceof jQuery)) {
+            this.res = res.el;
+            if (res.el instanceof jQuery) {
+                this.el = res.el;
+            } else {
+                this.el = $(res.el);
             }
+            this.dom = res.tmpl;
+            if (res.events == undefined) {
+                res.events = function() {
+                    return false;
+                }
+            }
+            this.events = res.events;
+            if (typeof(res.data) == 'string') {
+                this.data = {};
+                this.dataurl = res.data;
+            } else {
+                this.data = res.data;
+                this.dataurl = res.dataurl;
+            }
+            this.interval = res.interval;
+            this.dataloaded = false;
+            this.domloaded = false;
+            this.html = '';
+            this.errorevents = res.errorevents;
+            this.init();
+        } else {
+            this.res = res;
+            if (this.res instanceof jQuery) {
+                this.el = res;
+            } else {
+                this.el = $(this.res);
+            }
+            this.dom = dom;
+            if (events == undefined) {
+                events = function() {
+                    return false;
+                }
+            }
+            this.events = events;
+            if (typeof(data) == 'string') {
+                this.data = {};
+                this.dataurl = data;
+            } else {
+                this.data = data;
+                this.dataurl = dataurl;
+            }
+            this.data = data;
+            this.dataurl = dataurl;
+            this.interval = interval;
+            this.dataloaded = false;
+            this.domloaded = false;
+            this.html = '';
+            this.errorevents = errorevents;
+            this.init();
         }
-        this.events = events;
-        this.dataurl = dataurl;
-        this.interval = interval;
-        this.dataloaded = false;
-        this.domloaded = false;
-        this.html = '';
-        this.errorevents = errorevents;
-        this.init();
     }
     init() {
         let self = this;
@@ -46,7 +81,9 @@ class Struct {
             } else {
                 self.el.html(self.setData(self.data, self.html));
             }
-            self.events();
+            $(window).ready(function() {
+                self.events();
+            });
         } else {
             setTimeout(function() {
                 self.render();
@@ -92,20 +129,6 @@ class Struct {
             self.html = self.dom;
         }
     }
-    //loadTmpl() {
-    //let self = this;
-    //self.getData(
-    //'/' + self.dom + '.html',
-    //function(xmlhttp) {
-    //self.html = xmlhttp.responseText;
-    //self.domloaded = true;
-    //},
-    //function() {
-    //self.domloaded = true;
-    //self.html = self.dom;
-    //}
-    //);
-    //}
     loadData() {
         let self = this;
         if (this.dataurl != undefined) {
