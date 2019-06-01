@@ -32,7 +32,7 @@ class Form {
             url: self.action,
             type: self.method,
             dataType: 'json',
-            data: self.el.serialize(),
+            data: self.genData(),
             //complete: function(jqXHR, textStatus) {
             // callback
             //},
@@ -78,5 +78,16 @@ class Form {
             //console.log([jqXHR, textStatus, errorThrown]);
             //}
         });
+    }
+    genData() {
+        let res = {};
+        let self = this;
+        let data = self.el.serializeArray();
+        for (var i in data) {
+            let one = data[i];
+            res[one.name] = one.value;
+        }
+
+        return JSON.stringify(res);
     }
 }
