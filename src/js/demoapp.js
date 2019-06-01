@@ -122,3 +122,20 @@ let demo7 = new Struct({
         });
     }
 }).render();
+
+//form demo (dev)
+
+
+let demo_forms = new Struct({
+    el: '#demo_forms_res',
+    tmpl: 'demos/demo_forms',
+    data: [{
+        el_name: "",
+        el_value: "",
+        el_descr: "",
+        city: "",
+    }, ],
+    events: function() {
+        let form1 = new Form($('#demoform1'));
+    }
+}).render();

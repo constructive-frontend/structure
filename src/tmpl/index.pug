@@ -13,6 +13,16 @@ html(lang='en')
             .col-3
             .col-9
                 h1 constructive framework structure.js
+                h2(class="scrollspy" data-lvl="1" data-title="Dev" data-ico="fa-angle-right") Dev
+                div.dev
+                    form.form(id="demoform1" action="json/demoformresponse.json")
+                        div.btnswrap.padding
+                            button(class="btn-success") Add element
+                        #demo_forms_res
+                        .col
+                            .col-9
+                            .col-3
+                                input(type="submit" class="margin-t btn-primary")
                 h2(class="scrollspy" data-lvl="1" data-title="Base usage" data-ico="fa-angle-right") Base usage
                 p Add to html
                 pre
@@ -234,4 +244,5 @@ html(lang='en')
     footer
     script(src="js/libs.js")
     script(src='js/cfstructure.min.js')
+    script(src='js/cfform.min.js')
     script(src='js/demoapp.min.js')

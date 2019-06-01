@@ -1,0 +1,17 @@
+{
+    "errors": [
+        {
+            "item": "el_name",
+            "msg": "this field is required!"
+        },
+        {
+            "item": "el_descr",
+            "msg": "this field is required!"
+        },
+        {
+            "item": "city",
+            "msg": "this field is required!"
+        }
+    ],
+    "data": null
+}

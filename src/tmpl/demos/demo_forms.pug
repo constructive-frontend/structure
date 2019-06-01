@@ -1,0 +1,18 @@
+div.elementform.padding(style="border: 1px solid grey; border-left: 4px solid lightblue;")
+    input.no-border-b(type="text" placeholder="Element name.." name="el_name" value="{{el_name}}")
+    input(type="text" placeholder="Element value.." name="el_value" value="{{el_value}}")
+    label(for="city") Select city
+    select(name="city" id="city")
+        option(value="0") test1
+        option(value="2") test2
+        option(value="3") test3
+        option(value="4") test4
+        option(value="5") test5
+    div
+        label(for="gender_male") sldjfsdlfjsdlf
+        input(type="radio" id="gender_male" name="gender" value="male")
+    div
+        label(for="gender_female") sldjfsdlfjsdlf
+        input(type="radio" id="gender_female" name="gender" value="female")
+    label(for="el_descr") Description
+    textarea(cols="30" rows="6" placeholder="Element description.." id="el_descr" name="el_descr") {{el_descr}}
