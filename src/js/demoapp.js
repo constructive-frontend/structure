@@ -136,6 +136,12 @@ let demo_forms = new Struct({
         city: "",
     }, ],
     events: function() {
-        let form1 = new Form($('#demoform1'));
+        let form1 = new Form({
+            el: $('#demoform1'),
+            event: function() {
+                console.log(this.data);
+
+            }
+        });
     }
 }).render();

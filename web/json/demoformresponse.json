@@ -1,17 +1,25 @@
 {
-    "errors": [
-        {
-            "item": "el_name",
-            "msg": "this field is required!"
+    "errors": null,
+    "data": {
+        "ID": 1,
+        "CreatedAt": "2019-04-28T00:45:44Z",
+        "UpdatedAt": "2019-04-28T00:45:44Z",
+        "DeletedAt": null,
+        "Email": "admin@admin.a",
+        "Password": "",
+        "Role": "admin",
+        "Token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjEiLCJuYW1lIjoiYWRtaW5AYWRtaW4uYSIsInJvbGUiOiJhZG1pbiJ9.ctHVorZmNk44TRpEV45GD-jdsPlAjppmA0Z8WiXeuAo",
+        "CallBackUrl": "",
+        "Profile": {
+            "ID": 0,
+            "CreatedAt": "0001-01-01T00:00:00Z",
+            "UpdatedAt": "0001-01-01T00:00:00Z",
+            "DeletedAt": null,
+            "Firstname": "",
+            "Middlename": "",
+            "Lastname": "",
+            "Phone": ""
         },
-        {
-            "item": "el_descr",
-            "msg": "this field is required!"
-        },
-        {
-            "item": "city",
-            "msg": "this field is required!"
-        }
-    ],
-    "data": null
+        "ProfileID": 0
+    }
 }

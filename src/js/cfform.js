@@ -1,6 +1,7 @@
 class Form {
-    constructor(form) {
-        this.el = form;
+    constructor(opt) {
+        this.el = opt.el;
+        this.data = {};
         this.action = '';
         this.method = 'GET';
         if (typeof this.el.attr('action') !== typeof undefined && this.el.attr('action') !== false) {
@@ -9,6 +10,7 @@ class Form {
         if (typeof this.el.attr('method') !== typeof undefined && this.el.attr('method') !== false) {
             this.method = this.el.attr('method');
         }
+        this.event = opt.event;
         this.init();
     }
     init() {
@@ -37,7 +39,7 @@ class Form {
             // callback
             //},
             success: function(data, textStatus, jqXHR) {
-                if (data.errors.length > 0) {
+                if (data.errors != null && data.errors.length > 0) {
 
                     self.el.find(':input').each(function(index) {
                         let input = $(this);
@@ -72,6 +74,26 @@ class Form {
                             }
                         }
                     });
+                } else {
+                    self.el.find(':input').each(function(index) {
+                        let input = $(this);
+                        let n = input.attr('name');
+                        let haserr = 0;
+
+                        input.removeClass('error').addClass('success');
+                        if (input.prev().prop('tagName') == 'LABEL') {
+                            input.prev().removeClass('error').addClass('success');
+                        }
+                        if (input.next().hasClass('errors')) {
+                            input.next().remove();
+                        }
+                    });
+
+                    self.data = data.data;
+
+                    self.event();
+
+                    return false;
                 }
             }
             //error: function(jqXHR, textStatus, errorThrown) {
