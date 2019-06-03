@@ -2,11 +2,6 @@ class Struct {
     constructor(res, dom, data, events, dataurl, interval, errorevents) {
         if (typeof(res) == 'object' && !(res instanceof jQuery)) {
             this.res = res.el;
-            if (res.el instanceof jQuery) {
-                this.el = res.el;
-            } else {
-                this.el = $(res.el);
-            }
             this.dom = res.tmpl;
             if (res.events == undefined) {
                 res.events = function() {
@@ -29,11 +24,6 @@ class Struct {
             this.init();
         } else {
             this.res = res;
-            if (this.res instanceof jQuery) {
-                this.el = res;
-            } else {
-                this.el = $(this.res);
-            }
             this.dom = dom;
             if (events == undefined) {
                 events = function() {
@@ -71,6 +61,12 @@ class Struct {
     }
     render() {
         let self = this;
+
+        if (self.res instanceof jQuery) {
+            self.el = self.res;
+        } else {
+            self.el = $(self.res);
+        }
 
         if (self.dataloaded && self.domloaded) {
             if (Array.isArray(self.data)) {
