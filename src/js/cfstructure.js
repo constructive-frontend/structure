@@ -157,11 +157,10 @@ class Struct {
             }
         };
 
+        xmlhttp.open("GET", url, true);
         if (self.token != undefined) {
             xmlhttp.setRequestHeader("Authorization", "Bearer " + self.token)
         }
-
-        xmlhttp.open("GET", url, true);
         xmlhttp.send();
     }
 }
