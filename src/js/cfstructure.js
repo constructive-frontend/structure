@@ -1,5 +1,5 @@
 class Struct {
-    constructor(res, dom, data, events, dataurl, interval, errorevents) {
+    constructor(res, dom, data, events, dataurl, interval, errorevents, token) {
         if (typeof(res) == 'object' && !(res instanceof jQuery)) {
             this.res = res.el;
             this.dom = res.tmpl;
@@ -21,6 +21,7 @@ class Struct {
             this.domloaded = false;
             this.html = '';
             this.errorevents = res.errorevents;
+            this.token = res.token;
             this.init();
         } else {
             this.res = res;
@@ -45,6 +46,7 @@ class Struct {
             this.domloaded = false;
             this.html = '';
             this.errorevents = errorevents;
+            this.token = token;
             this.init();
         }
     }
@@ -154,6 +156,10 @@ class Struct {
                 }
             }
         };
+
+        if (self.token != undefined) {
+            xmlhttp.setRequestHeader("Authorization", "Bearer " + self.token)
+        }
 
         xmlhttp.open("GET", url, true);
         xmlhttp.send();
