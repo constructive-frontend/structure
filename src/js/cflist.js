@@ -16,13 +16,12 @@ class List extends Struct {
 
         if (self.dataloaded && self.domloaded) {
             if (self.data.errors === null || self.data.errors.length == 0) {
-                self.data = self.data.data;
-                if (Array.isArray(self.data) && self.data.length > 0) {
+                if (Array.isArray(self.data.data) && self.data.data.length > 0) {
                     self.el.html('');
-                    for (let one in self.data) {
-                        self.el.append(self.setData(self.data[one], self.html));
+                    for (let one in self.data.data) {
+                        self.el.append(self.setData(self.data.data[one], self.html));
                     }
-                } else if (Array.isArray(self.data) && self.data.length == 0) {
+                } else if (Array.isArray(self.data.data) && self.data.data.length == 0) {
                     self.el.html(`
                         <div class="info">
                             No data found
