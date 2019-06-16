@@ -145,3 +145,31 @@ let demo_forms = new Struct({
         });
     }
 }).render();
+
+let demo_list = new List({
+    el: '#res08',
+    tmpl: `
+        <div class="col-4">{{title}}</div>
+    `,
+    data: '/json/demo8.json',
+    searchform: `
+        <form class="form">
+            <input type="text" name="title" placeholder="type to search..."></input>
+            <input type="text" name="cat" placeholder="search by category..."></input>
+        </form>
+    `,
+}).render();
+
+let demo_list_with_errors = new List({
+    el: '#res09',
+    tmpl: `
+        <div>{{title}}</div>
+    `,
+    data: {
+        errors: [{
+            "item": "json",
+            "msg": "wrong json format"
+        }],
+        data: [],
+    }
+}).render();
