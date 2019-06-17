@@ -36,10 +36,13 @@ class List extends Struct {
                     `);
                 }
                 self.staticurl = self.dataurl;
-                self.addSearchForm();
-                $(window).ready(function() {
-                    self.events();
-                });
+                if (self.searchform != undefined && self.searchform != '') {
+                    self.addSearchForm();
+                } else {
+                    $(window).ready(function() {
+                        self.events();
+                    });
+                }
             } else {
                 for (let i in self.data.errors) {
                     self.el.append(`
@@ -79,6 +82,10 @@ class List extends Struct {
                             self.dataurl = self.staticurl;
                         }
                         return false;
+                    });
+
+                    $(window).ready(function() {
+                        self.events();
                     });
                 }
             }).render();
