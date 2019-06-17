@@ -73,9 +73,10 @@ class List extends Struct {
                     self.form = self.filters.el.find('form');
                     console.log(self.form);
                     self.form.find(':input').bind('change, keyup', function() {
-                        if ($(this).val().length > 2) {
+                        if ($(this).val().length > 2 || $(this).val().length == 0) {
                             self.dataurl = self.staticurl + '?' + self.form.serialize();
                             self.rerender();
+                            self.dataurl = self.staticurl;
                         }
                         return false;
                     });
