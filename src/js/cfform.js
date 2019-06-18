@@ -40,7 +40,7 @@ class Form {
             url: self.action,
             type: self.method,
             dataType: 'json',
-            data: self.genData(),
+            data: data,
             //complete: function(jqXHR, textStatus) {
             // callback
             //},
@@ -110,16 +110,26 @@ class Form {
     genData(isValidate) {
         let res = {};
         let self = this;
-        let data = self.el.serializeArray();
-        for (var i in data) {
-            let one = data[i];
-            res[one.name] = one.value;
-        }
+        if (self.method == 'GET') {
+            let data = self.el.serialize();
+            if (isValidate !== undefined && isValidate == 1) {
+                data = data + '&isValidate=1';
+            }
+            return data;
+        } else {
+            let data = self.el.serializeArray();
+            for (var i in data) {
+                let one = data[i];
+                res[one.name] = one.value;
+            }
 
-        if (isValidate !== undefined && isValidate == 1) {
-            res['isValidate'] = 1;
-        }
+            console.log('isValidate = ' + isValidate);
 
-        return JSON.stringify(res);
+            if (isValidate !== undefined && isValidate == 1) {
+                res['isValidate'] = 1;
+            }
+
+            return JSON.stringify(res);
+        }
     }
 }
