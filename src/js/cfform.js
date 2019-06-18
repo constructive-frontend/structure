@@ -30,6 +30,12 @@ class Form {
     }
     send(el) {
         let self = this;
+        let data;
+        if (el !== undefined) {
+            data = self.genData(1);
+        } else {
+            data = self.genData();
+        }
         $.ajax({
             url: self.action,
             type: self.method,
@@ -101,13 +107,17 @@ class Form {
             //}
         });
     }
-    genData() {
+    genData(isValidate) {
         let res = {};
         let self = this;
         let data = self.el.serializeArray();
         for (var i in data) {
             let one = data[i];
             res[one.name] = one.value;
+        }
+
+        if (isValidate !== undefined && isValidate == 1) {
+            res['isValidate'] = 1;
         }
 
         return JSON.stringify(res);
