@@ -31,16 +31,18 @@ class Form {
     send(el) {
         let self = this;
         let data;
-        if (el !== undefined) {
-            data = self.genData(1);
-        } else {
-            data = self.genData();
-        }
         $.ajax({
             url: self.action,
             type: self.method,
             dataType: 'json',
-            data: data,
+            data: self.genData(),
+            beforeSend: function(request) {
+                if (el !== undefined) {
+                    request.setRequestHeader("isValidate", 1);
+                } else {
+                    request.setRequestHeader("isValidate", 0);
+                }
+            },
             //complete: function(jqXHR, textStatus) {
             // callback
             //},
@@ -107,14 +109,11 @@ class Form {
             //}
         });
     }
-    genData(isValidate) {
+    genData() {
         let res = {};
         let self = this;
         if (self.method == 'GET') {
             let data = self.el.serialize();
-            if (isValidate !== undefined && isValidate == 1) {
-                data = data + '&isValidate=1';
-            }
             return data;
         } else {
             let data = self.el.serializeArray();
@@ -122,13 +121,6 @@ class Form {
                 let one = data[i];
                 res[one.name] = one.value;
             }
-
-            console.log('isValidate = ' + isValidate);
-
-            if (isValidate !== undefined && isValidate == 1) {
-                res['isValidate'] = 1;
-            }
-
             return JSON.stringify(res);
         }
     }
